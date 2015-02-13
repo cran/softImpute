@@ -11,7 +11,8 @@
   column centered sparse matrices.
 }
 \usage{
-svd.als(x, rank.max = 2, lambda = 0, thresh = 1e-05, maxit = 100, trace.it = FALSE, warm.start = NULL, final.svd = TRUE)
+svd.als(x, rank.max = 2, lambda = 0, thresh = 1e-05, maxit = 100,
+        trace.it = FALSE, warm.start = NULL, final.svd = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,7 +24,8 @@ such as \code{softImpute}.
 }
   \item{rank.max}{
 The maximum rank for the solution. This is also the dimension of the
-left and right matrices of orthogonal singular vectors.
+left and right matrices of orthogonal singular vectors. 'rank.max' should be no
+          bigger than 'min(dim(x)'.
 }
   \item{lambda}{
 The regularization parameter. \code{lambda=0} corresponds to an
@@ -79,7 +81,8 @@ Matrices},
 \author{Trevor Hastie, Rahul Mazumder\cr
   Maintainer: Trevor Hastie  \email{hastie@stanford.edu}
 }
-\seealso{\code{biScale},\code{softImpute},\code{Incomplete},\code{lambda0},\code{impute},\code{complete}
+\seealso{\code{biScale}, \code{softImpute}, \code{Incomplete},
+  \code{lambda0}, \code{impute}, \code{complete}
 }
 \examples{
 #create a matrix and run the algorithm

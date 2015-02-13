@@ -66,6 +66,8 @@ num/max(denom,1e-9)
   
 
 
+setMethod("%*%",signature(x="SparseplusLowRank",y="Matrix"),.rightmult)
+setMethod("%*%",signature(x="Matrix",y="SparseplusLowRank"),.leftmult)
 setMethod("%*%",signature(x="SparseplusLowRank",y="ANY"),.rightmult)
 setMethod("%*%",signature(x="ANY",y="SparseplusLowRank"),.leftmult)
 setMethod("dim", signature(x = "SparseplusLowRank"),

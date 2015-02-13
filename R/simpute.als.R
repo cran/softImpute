@@ -20,8 +20,8 @@ simpute.als<-function (x, J = 2, thresh = 1e-05,lambda=0,maxit=100,trace.it=TRUE
     D=warm.start$d
     JD=sum(D>0)
     if(JD >= J){
-      U=warm.start$u[,seq(J)]
-      V=warm.start$v[,seq(J)]
+      U=warm.start$u[,seq(J),drop=FALSE]
+      V=warm.start$v[,seq(J),drop=FALSE]
       Dsq=D[seq(J)]
     }
     else{

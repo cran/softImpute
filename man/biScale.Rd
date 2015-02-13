@@ -11,7 +11,8 @@ matrices with NAs, matrices of class "Incomplete", and matrix in
 "sparseMatrix" format.
 }
 \usage{
-biScale(x, maxit = 20, thresh = 1e-09, row.center = TRUE, row.scale = TRUE, col.center = TRUE, col.scale = TRUE, trace = FALSE)
+biScale(x, maxit = 20, thresh = 1e-09, row.center = TRUE, row.scale =TRUE,
+        col.center = TRUE, col.scale = TRUE, trace = FALSE)
 }
 \arguments{
   \item{x}{

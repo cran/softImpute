@@ -4,6 +4,8 @@
 \alias{SparseplusLowRank-class}
 \alias{\%*\%,ANY,SparseplusLowRank-method}
 \alias{\%*\%,SparseplusLowRank,ANY-method}
+\alias{\%*\%,Matrix,SparseplusLowRank-method}
+\alias{\%*\%,SparseplusLowRank,Matrix-method}
 \alias{as.matrix,SparseplusLowRank-method}
 \alias{colMeans,SparseplusLowRank-method}
 \alias{colSums,SparseplusLowRank-method}
@@ -33,6 +35,8 @@ or by a call to \code{splr}
   \describe{
     \item{\%*\%}{\code{signature(x = "ANY", y = "SparseplusLowRank")}: ... }
     \item{\%*\%}{\code{signature(x = "SparseplusLowRank", y = "ANY")}: ... }
+    \item{\%*\%}{\code{signature(x = "Matrix", y = "SparseplusLowRank")}: ... }
+    \item{\%*\%}{\code{signature(x = "SparseplusLowRank", y = "Matrix")}: ... }
     \item{as.matrix}{\code{signature(x = "SparseplusLowRank")}: ... }
     \item{colMeans}{\code{signature(x = "SparseplusLowRank")}: ... }
     \item{colSums}{\code{signature(x = "SparseplusLowRank")}: ... }

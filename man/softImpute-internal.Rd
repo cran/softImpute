@@ -1,5 +1,6 @@
 \name{softImpute-internal}
 \title{Internal softImpute functions}
+\alias{clean.warm.start}
 \alias{simpute.als}
 \alias{simpute.svd}
 \alias{Ssimpute.als}

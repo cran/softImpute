@@ -28,6 +28,8 @@ cs.default <-
       }
       else dalpha=0
 ###Scaling
+      dgamma=1
+      dtau=1
       if(row.scale|col.scale){
         xc=scale(x-alpha,beta,FALSE)
 ### Column scales
@@ -36,14 +38,13 @@ cs.default <-
           gamma=sqrt(apply( (xc/tau)^2,2,mean,na.rm=TRUE))
           dgamma=gamma/dgamma
         }
-        else dgamma=1
 ### Row scales
       if(row.scale){
         dtau=tau
         tau=sqrt(apply(scale(xc,FALSE,gamma)^2,1,mean,na.rm=TRUE))
         dtau=tau/dtau
       }
-        else dtau=1
+
 ###Check
       }
         xhat=centerscaleD(x,tau,gamma,alpha,beta)
@@ -69,7 +70,9 @@ cs.sparseMatrix <-
         sfac=suvC(as.matrix(tau),as.matrix(gamma),irow,pcol)
         x@x=x@x/sfac
         alpha=cbind(alpha,rep(1,m))/tau
+        colnames(alpha)=NULL
         beta=cbind(rep(1,n),beta)/gamma
+        colnames(beta)=NULL
         splr(x,alpha,-beta)
       }
       xhat=centerscaleC(x,tau,gamma,alpha,beta,m,n)

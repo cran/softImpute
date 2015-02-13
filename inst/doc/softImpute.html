@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>output: html_document</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<!-- 
+%\VignetteEngine{knitr::knitr} 
+%\VignetteIndexEntry{An Introduction to softImpute}
+--> 
+
+<hr/>
+
+<p>title: &ldquo;softImpute Vignette&rdquo;
+author: &ldquo;Trevor Hastie&rdquo;
+date: &ldquo;September 5, 2014&rdquo;</p>
+
+<h2>output: html_document</h2>
+
+<p><code>softImpute</code> is a package for matrix completion using nuclear norm regularization. It offers two algorithms:</p>
+
+<ul>
+<li><p>One iteratively computes the soft-thresholded SVD of a filled in matrix - an algorithm described in <a href="http://web.stanford.edu/%7Ehastie/Papers/mazumder10a.pdf">Mazumder et al (2010)</a>. This is option <code>type=&quot;svd&quot;</code> in the call to <code>softImpute()</code>.</p></li>
+<li><p>The other uses alternating ridge regression, at each stage filling in the missing entries with the latest estimates. This is described in <a href="http://arxiv.org/abs/1410.2596">Hastie et al (2014)</a>. This we believe is the faster option, and is option <code>type=&quot;als&quot;</code> in the call to <code>softImpute</code>.</p>
+
+<p>The package can deal with both small and very large matrices; the latter are stored in sparse-matrix format using a new S4 class <code>&quot;Incomplete&quot;</code>. For example, <code>softImpute</code> can happily fit a rank 100 SVD to the netflix data (480,189 x 17,770, 99% missing) using a machine with about 32Gb of memory. For smaller matrices with missing data, the usual full matrix with <code>NA</code> suffices.</p>
+
+<p>The package has two other notable features. It can compute a (low-rank) SVD of a large sparse matrix, stored in sparse matrix format. This can be done either with nuclear-norm regularization or not, the former being somewhat faster.</p>
+
+<p>There is a function <code>biScale()</code> that generalizes the <code>scale()</code> function in R. It can simultaneously scale a matrix to have row and column means zero, and row and column variances one. Of course, any subset of these can be chosen as well. This function can deal with the missing values, if present. It is also smart enough to deal with large sparse matrices. In this case, it does not actually apply the centering operation and destroy the sparsity; instead it stores the resulting matrix in the new matrix class <code>&quot;SparseplusLowRank&quot;</code>. This is a special class used by <code>softImpute</code>, originally created to allow it to avoid ever storing a large, filled in matrix, when the original matrix was stored in sparse matrix format via class <code>&quot;Incomplete&quot;</code>.</p>
+
+<p>This vignette is a simple guide to using the package.</p></li>
+</ul>
+
+<h2>What softImpute solves</h2>
+
+<p>Here we briefly describe the problem solved. Suppose \(X\) is a large \(m\times n\) matrix, with many missing entries. Let \(\Omega\) contain the pairs of indices \((i,j)\) where \(X\) is observed, and let \(P_\Omega(X)\) denote a matrix with the entries in \(\Omega\) left alone, and all other entries set to zero. So when \(X\) has missing entries in \(\Omega^\perp\), \(P_\Omega(X)\) would set the missing values to zero. </p>
+
+<p>Consider the criterion
+ \[\min_M\frac12\|P_\Omega(X)-P_\Omega(M)\|^2_F+\lambda\|M\|_*,\]
+ where \(\|M\|_*\) is the nucelar norm of \(M\) (sum of singular values).</p>
+
+<p>If \(\widehat M\) solves this convex-cone problem, then it satisfies the following stationarity condition:
+ \[ {\widehat M}=S_\lambda(Z)\] 
+ where \[Z=P_\Omega(X)+P_{\Omega^\perp}(\widehat M).\]
+ Hence \(Z\) is the &ldquo;filled in&rdquo;&ldquo; version of \(X\). The operator \(S_\lambda(Z)\) applied to matrix \(Z\) does the following:</p>
+
+<ol>
+<li>Compute the SVD of \(Z=UDV^T\), and let \(d_i\) be the singular values in \(D\).</li>
+<li>Soft-threshold the singular values: \(d_i^*= (d_i-\lambda)_+\).</li>
+<li><p>Reconstruct: \(S_\lambda(Z)=UD^*V^T\).
+We call this operation the &quot;soft-thresholded SVD&rdquo;. Notice that for sufficiently large \(\lambda\), \(D^*\) will be rank-reduced, and hence so will be \(UD^*V^T\).</p>
+
+<p>This suggests the obvious iterative algorithm: using the current estimate for \(M\), create \(Z\), and update \(M\) by the soft-thresholded SVD of \(Z\).</p></li>
+</ol>
+
+<p>This is exactly what <code>softImpute</code> does on (small) matrices with missing values stored as NAs. By small we mean small enough that the SVD can be computed by R in a small amount of time. </p>
+
+<p>This is not tenable for very large matrices, like those stored as class <code>&quot;Incomplete&quot;</code>. Here we make two very important changes to the recipe:</p>
+
+<ul>
+<li>Re-express \(Z\) at each iteration as as \[Z=P_\Omega(X)-P_\Omega(\widehat M) + \widehat M.\] This is of the form <code>&quot;SparseplusLowRank&quot;</code> (assuming \(\widehat M\) is low rank), and hence can be stored. Left and right matrix multiplies by skinny matrices can also be efficiently performed.</li>
+<li>Anticipating that the solution \(\widehat M\) will have low rank, compute only a low-rank SVD of \(Z\), using alternating subspace methods.</li>
+</ul>
+
+<p>Indeed, <code>softImpute</code> has a <code>rank</code> argument that allows one to limit the rank of the solution; if the algorithm returns a solution with rank lower than the specified rank \(r\), you know it has solved the unrestricted problem.</p>
+
+<p>Consider the alternative criterion
+ \[\min_{A,B}\frac12\|P_\Omega(X)-P_\Omega(AB^T)\|^2_F+\frac{\lambda}2(\|A\|_F^2 +\|B\|_F^2),\]
+ where \(A\) and \(B\) have each \(r\) columns, and let us suppose that \(r\) is bigger than or equal to the solution rank of the earlier criterion. This problem is not convex, but remarkably, it has a solution that satisfies 
+ \({\widehat A}{\widehat B}^T=\widehat M\)!</p>
+
+<p>We can once again characterize the stationarity conditions, now in terms of \(\widehat A\) and \(\widehat B\). Let \[Z=P_\Omega(X)+P_{\Omega^\perp}({\widehat A}{\widehat B}^T),\] the filled in version of \(X\). Then 
+\[\widehat B= ({\widehat A}^T{\widehat A}+\lambda I)^{-1}{\widehat A}^T Z.\] 
+We get \(\widehat  B\) by ridge regressions of the columns of \(Z\) on \(\widehat A\). For \(\widehat A\) its the same, with the roles of \(A\) and \(B\) reversed. This again suggests an obvious alternation, now by ridged regressions.
+After each regression, we update the component \(A\) or \(B\), and the filled in \(Z\). If \(r\) is sufficiently large, this again solves the same problem as before. </p>
+
+<p>This last algorithm (softImpute ALS) can be seen as combining the alternating subspace SVD algorithm for computing the SVD with the iterative filling in and SVD calculation. It turns out that this interweaving leads to computational savings, and allows for a very efficient distributed implementation (not covered here).</p>
+
+<h2>A simple example</h2>
+
+<p>We will start with a small and simple example. Lets generate a small matrix and make some values missing.</p>
+
+<pre><code class="r">require(softImpute)
+</code></pre>
+
+<pre><code>## Loading required package: softImpute
+## Loading required package: Matrix
+## Loaded softImpute 1.4
+</code></pre>
+
+<pre><code class="r">set.seed(1011)
+x=matrix(rnorm(30),6,5)
+x[sample(1:30,10,replace=FALSE)]=NA
+x
+</code></pre>
+
+<pre><code>##            [,1]        [,2]       [,3]        [,4]        [,5]
+## [1,]  0.8654889  0.01565179  0.1747903          NA          NA
+## [2,] -0.6004172          NA -0.2119090          NA          NA
+## [3,] -0.7169292          NA         NA  0.06437356 -0.09754133
+## [4,]  0.6965558 -0.50331812  0.5584839  1.54375663          NA
+## [5,]  1.2311610 -0.34232368 -0.8102688 -0.82006429 -0.13256942
+## [6,]  0.2664415  0.14486388         NA          NA -2.24087863
+</code></pre>
+
+<pre><code class="r">fits=softImpute(x,trace=TRUE,type=&quot;svd&quot;)
+</code></pre>
+
+<pre><code>## 1 : obj 0.09323 ratio 0.03954925 
+## 2 : obj 0.08281 ratio 0.0304397 
+## 3 : obj 0.07372 ratio 0.05560424 
+## 4 : obj 0.05961 ratio 0.0692083 
+## 5 : obj 0.03804 ratio 0.03375309 
+## 6 : obj 0.02178 ratio 0.01186641 
+## 7 : obj 0.01407 ratio 0.004025632 
+## 8 : obj 0.01094 ratio 0.001469776 
+## 9 : obj 0.00965 ratio 0.0006177431 
+## 10 : obj 0.00906 ratio 0.0003083128 
+## 11 : obj 0.00874 ratio 0.0001828115 
+## 12 : obj 0.00854 ratio 0.000124992 
+## 13 : obj 0.0084 ratio 9.42978e-05 
+## 14 : obj 0.00829 ratio 7.552612e-05 
+## 15 : obj 0.0082 ratio 6.258545e-05 
+## 16 : obj 0.00812 ratio 5.286399e-05 
+## 17 : obj 0.00805 ratio 4.515155e-05 
+## 18 : obj 0.008 ratio 3.88322e-05 
+## 19 : obj 0.00795 ratio 3.355663e-05 
+## 20 : obj 0.00791 ratio 2.910375e-05 
+## 21 : obj 0.00787 ratio 2.53197e-05 
+## 22 : obj 0.00784 ratio 2.208953e-05 
+## 23 : obj 0.00781 ratio 1.932322e-05 
+## 24 : obj 0.00779 ratio 1.694815e-05 
+## 25 : obj 0.00777 ratio 1.490467e-05 
+## 26 : obj 0.00775 ratio 1.31432e-05 
+## 27 : obj 0.00773 ratio 1.162228e-05 
+## 28 : obj 0.00771 ratio 1.030704e-05 
+## 29 : obj 0.0077 ratio 9.168035e-06
+</code></pre>
+
+<pre><code class="r">fits
+</code></pre>
+
+<pre><code>## $u
+##              [,1]       [,2]
+## [1,] -0.356510556 -0.2679832
+## [2,]  0.308921735  0.1715671
+## [3,] -0.006010048  0.3681593
+## [4,] -0.605838251 -0.1107379
+## [5,]  0.056717156 -0.8263298
+## [6,] -0.638102376  0.2610070
+## 
+## $d
+## [1] 4.752691 2.056353
+## 
+## $v
+##             [,1]       [,2]
+## [1,] -0.21291481 -0.7896647
+## [2,]  0.04905133  0.2236334
+## [3,] -0.23498906  0.4350556
+## [4,] -0.56011295  0.3393672
+## [5,]  0.76375053  0.1482374
+## 
+## attr(,&quot;lambda&quot;)
+## [1] 0
+## attr(,&quot;call&quot;)
+## softImpute(x = x, type = &quot;svd&quot;, trace.it = TRUE)
+</code></pre>
+
+<p>Since this is a small matrix, it has solved it using repeated SVDs. There is no penalization here (\(\lambda=0\)), and by default the rank was taken to be 2. Since there is no penalization, if the rank was given to be \(\min(m,n)\), then there is no restriction, and any values for the missing data would give the same minimum loss of 0. In other words, either penalization, or a rank restriction (or both) are needed for sensible imputation.</p>
+
+<p>We could use ALS instead here (the default for <code>type=</code> argument)</p>
+
+<pre><code class="r">fita=softImpute(x,trace=TRUE)
+</code></pre>
+
+<pre><code>## 1 : obj 0.24087 ratio 5.681397 
+## 2 : obj 0.07848 ratio 0.1433758 
+## 3 : obj 0.05745 ratio 0.06018666 
+## 4 : obj 0.035 ratio 0.04942818 
+## 5 : obj 0.01739 ratio 0.02011121 
+## 6 : obj 0.01077 ratio 0.004749478 
+## 7 : obj 0.0091 ratio 0.001136182 
+## 8 : obj 0.00862 ratio 0.0003569266 
+## 9 : obj 0.00841 ratio 0.0001601899 
+## 10 : obj 0.00829 ratio 9.816138e-05 
+## 11 : obj 0.00819 ratio 7.211271e-05 
+## 12 : obj 0.00812 ratio 5.752175e-05 
+## 13 : obj 0.00805 ratio 4.751506e-05 
+## 14 : obj 0.008 ratio 3.986899e-05 
+## 15 : obj 0.00795 ratio 3.372181e-05 
+## 16 : obj 0.00791 ratio 2.866179e-05 
+## 17 : obj 0.00788 ratio 2.444886e-05 
+## 18 : obj 0.00785 ratio 2.092036e-05 
+## 19 : obj 0.00782 ratio 1.795519e-05 
+## 20 : obj 0.0078 ratio 1.545825e-05 
+## 21 : obj 0.00778 ratio 1.33526e-05 
+## 22 : obj 0.00777 ratio 1.157505e-05 
+## 23 : obj 0.00776 ratio 1.007324e-05 
+## 24 : obj 0.00774 ratio 8.803524e-06
+</code></pre>
+
+<p>The objectives are different! At this point we are playing with non-convex optimization, and so the solutions can be local minima. Lets use some regularization now, choosing a value for lambda that will give a rank 2 solution (this required trial and error to get it right).</p>
+
+<pre><code class="r">fits2=softImpute(x,rank.max=3,lambda=1.9,trace=TRUE,type=&quot;svd&quot;)
+</code></pre>
+
+<pre><code>## 1 : obj 0.32634 ratio 0.004981461 
+## 2 : obj 0.32629 ratio 0.0005114748 
+## 3 : obj 0.32629 ratio 0.0002365886 
+## 4 : obj 0.32629 ratio 0.0001715126 
+## 5 : obj 0.32628 ratio 0.0001295297 
+## 6 : obj 0.32628 ratio 9.811628e-05 
+## 7 : obj 0.32628 ratio 7.430162e-05 
+## 8 : obj 0.32628 ratio 5.62241e-05 
+## 9 : obj 0.32628 ratio 4.250505e-05 
+## 10 : obj 0.32628 ratio 3.210126e-05 
+## 11 : obj 0.32628 ratio 2.421928e-05 
+## 12 : obj 0.32628 ratio 1.825438e-05 
+## 13 : obj 0.32628 ratio 1.374544e-05 
+## 14 : obj 0.32628 ratio 1.034099e-05 
+## 15 : obj 0.32628 ratio 7.773308e-06
+</code></pre>
+
+<pre><code class="r">fita2=softImpute(x,rank.max=3,lambda=1.9,trace=TRUE)
+</code></pre>
+
+<pre><code>## 1 : obj 0.37079 ratio 1.161079 
+## 2 : obj 0.3342 ratio 0.09961669 
+## 3 : obj 0.32942 ratio 0.04511951 
+## 4 : obj 0.328 ratio 0.02392935 
+## 5 : obj 0.3273 ratio 0.01261684 
+## 6 : obj 0.32694 ratio 0.006532963 
+## 7 : obj 0.32674 ratio 0.003422696 
+## 8 : obj 0.32662 ratio 0.001866468 
+## 9 : obj 0.32655 ratio 0.001082436 
+## 10 : obj 0.3265 ratio 0.0006754999 
+## 11 : obj 0.32647 ratio 0.0004539165 
+## 12 : obj 0.32644 ratio 0.0003257315 
+## 13 : obj 0.32642 ratio 0.0002465175 
+## 14 : obj 0.32641 ratio 0.0001943276 
+## 15 : obj 0.32639 ratio 0.0001579382 
+## 16 : obj 0.32638 ratio 0.0001313475 
+## 17 : obj 0.32637 ratio 0.0001111766 
+## 18 : obj 0.32636 ratio 9.541774e-05 
+## 19 : obj 0.32636 ratio 8.281382e-05 
+## 20 : obj 0.32635 ratio 7.25401e-05 
+## 21 : obj 0.32635 ratio 6.403321e-05 
+## 22 : obj 0.32634 ratio 5.689528e-05 
+## 23 : obj 0.32634 ratio 5.083749e-05 
+## 24 : obj 0.32633 ratio 4.564542e-05 
+## 25 : obj 0.32633 ratio 4.115677e-05 
+## 26 : obj 0.32633 ratio 3.724667e-05 
+## 27 : obj 0.32632 ratio 3.381765e-05 
+## 28 : obj 0.32632 ratio 3.079265e-05 
+## 29 : obj 0.32632 ratio 2.810997e-05 
+## 30 : obj 0.32632 ratio 2.571972e-05 
+## 31 : obj 0.32631 ratio 2.358112e-05 
+## 32 : obj 0.32631 ratio 2.166052e-05 
+## 33 : obj 0.32631 ratio 1.992993e-05 
+## 34 : obj 0.32631 ratio 1.836585e-05 
+## 35 : obj 0.32631 ratio 1.694842e-05 
+## 36 : obj 0.32631 ratio 1.566075e-05 
+## 37 : obj 0.3263 ratio 1.448833e-05 
+## 38 : obj 0.3263 ratio 1.341867e-05 
+## 39 : obj 0.3263 ratio 1.244096e-05 
+## 40 : obj 0.3263 ratio 1.154575e-05 
+## 41 : obj 0.3263 ratio 1.072478e-05 
+## 42 : obj 0.3263 ratio 9.970789e-06 
+## final SVD: obj 0.32628
+</code></pre>
+
+<pre><code class="r">fits2$d
+</code></pre>
+
+<pre><code>## [1] 0.44477822 0.06991327 0.00000000
+</code></pre>
+
+<p>These two are the same (modulo convergence criterion). Because the smallest singular value is zero, we know we are in the convex regime, and so both algorithms give the same solution. We can impute the missing values using <code>complete()</code>, which returns the full matrix:</p>
+
+<pre><code class="r">complete(x,fits2)
+</code></pre>
+
+<pre><code>##            [,1]          [,2]         [,3]          [,4]        [,5]
+## [1,]  0.8654889  0.0156517882  0.174790310 -0.0031476922 -0.06440892
+## [2,] -0.6004172  0.0013211313 -0.211909000  0.0004572512  0.04221075
+## [3,] -0.7169292  0.0006880645  0.003009928  0.0643735628 -0.09754133
+## [4,]  0.6965558 -0.5033181179  0.558483917  1.5437566264  0.01520347
+## [5,]  1.2311610 -0.3423236829 -0.810268751 -0.8200642912 -0.13256942
+## [6,]  0.2664415  0.1448638842 -0.053927175 -0.0732346519 -2.24087863
+</code></pre>
+
+<p>We can first double center our matrix before completion</p>
+
+<pre><code class="r">xc=biScale(x,col.scale=FALSE,row.scale=FALSE,trace=TRUE)
+</code></pre>
+
+<pre><code>## Iter 1 Total Changes 1.662759 
+## Iter 2 Total Changes 0.07348511 
+## Iter 3 Total Changes 0.002380561 
+## Iter 4 Total Changes 0.0001529569 
+## Iter 5 Total Changes 1.082877e-05 
+## Iter 6 Total Changes 7.748851e-07 
+## Iter 7 Total Changes 5.552276e-08 
+## Iter 8 Total Changes 3.979003e-09 
+## Iter 9 Total Changes 2.851535e-10
+</code></pre>
+
+<pre><code class="r">xc
+</code></pre>
+
+<pre><code>##            [,1]        [,2]        [,3]       [,4]       [,5]
+## [1,]  0.1390011 -0.09270246 -0.04629866         NA         NA
+## [2,] -0.4469535          NA  0.44695354         NA         NA
+## [3,] -0.8252855          NA          NA  0.1160078  0.7092777
+## [4,] -0.1981945 -0.77993484  0.16913247  0.8089969         NA
+## [5,]  0.9662344  0.01088327 -0.56979652 -0.9250004  0.5176792
+## [6,]  0.3651963  0.86175224          NA         NA -1.2269486
+## attr(,&quot;biScale:row&quot;)
+## attr(,&quot;biScale:row&quot;)$center
+## [1]  0.38623908 -0.49371243 -0.23189248  0.55450155 -0.07532212 -0.43900352
+## 
+## attr(,&quot;biScale:row&quot;)$scale
+## [1] 1 1 1 1 1 1
+## 
+## attr(,&quot;biScale:column&quot;)
+## attr(,&quot;biScale:column&quot;)$center
+## [1]  0.3402487 -0.2778848 -0.1651501  0.1802582 -0.5749265
+## 
+## attr(,&quot;biScale:column&quot;)$scale
+## [1] 1 1 1 1 1
+## 
+## attr(,&quot;critmat&quot;)
+##       iter         crit
+##  [1,]    1 1.662759e+00
+##  [2,]    2 7.348511e-02
+##  [3,]    3 2.380561e-03
+##  [4,]    4 1.529569e-04
+##  [5,]    5 1.082877e-05
+##  [6,]    6 7.748851e-07
+##  [7,]    7 5.552276e-08
+##  [8,]    8 3.979003e-09
+##  [9,]    9 2.851535e-10
+</code></pre>
+
+<pre><code class="r">fits3=softImpute(xc,rank.max=3,lambda=1,type=&quot;svd&quot;)
+fits3$d
+</code></pre>
+
+<pre><code>## [1] 1.0937636 0.6483598 0.0000000
+</code></pre>
+
+<pre><code class="r">complete(x,fits3,unscale=TRUE)
+</code></pre>
+
+<pre><code>##            [,1]        [,2]       [,3]        [,4]        [,5]
+## [1,]  0.8654889  0.01565179  0.1747903  0.53515048 -0.16774406
+## [2,] -0.6004172 -0.85835047 -0.2119090 -0.14764048 -1.04932194
+## [3,] -0.7169292 -0.78692158 -0.3100817  0.06437356 -0.09754133
+## [4,]  0.6965558 -0.50331812  0.5584839  1.54375663  0.16449974
+## [5,]  1.2311610 -0.34232368 -0.8102688 -0.82006429 -0.13256942
+## [6,]  0.2664415  0.14486388 -0.6315001 -0.37088469 -2.24087863
+</code></pre>
+
+<p>Notice that we completed <code>x</code> with <code>fits3</code>, which was run on the centered version <code>xc</code>. The scaling info is stored on the SVD object as an attribute, and with <code>unscale=TRUE</code> (actually the default), the centering is reversed.</p>
+
+<h2>Debiasing the fit</h2>
+
+<p>We have recently added a function <code>deBias</code> (since version 1.4) that allows one to upscale the elements <code>d</code> of the SVD object returned by <code>softImpute</code>. This is achieved by linear regression using the observed values of <code>x</code>.</p>
+
+<pre><code class="r">fits2$d
+</code></pre>
+
+<pre><code>## [1] 0.44477822 0.06991327 0.00000000
+</code></pre>
+
+<pre><code class="r">deBias(x,fits2)$d
+</code></pre>
+
+<pre><code>## [1] 2.343979 1.999733 1.887577
+</code></pre>
+
+<h2>Using the sparse matrix version</h2>
+
+<p>So far we have not been worried about matrix size, because <code>x</code> is small. We can convert it to a sparse matrix object</p>
+
+<pre><code class="r">xs=as(x,&quot;Incomplete&quot;)
+xs
+</code></pre>
+
+<pre><code>## 6 x 5 sparse Matrix of class &quot;Incomplete&quot;
+##                                                               
+## [1,]  0.8654889  0.01565179  0.1747903  .           .         
+## [2,] -0.6004172  .          -0.2119090  .           .         
+## [3,] -0.7169292  .           .          0.06437356 -0.09754133
+## [4,]  0.6965558 -0.50331812  0.5584839  1.54375663  .         
+## [5,]  1.2311610 -0.34232368 -0.8102688 -0.82006429 -0.13256942
+## [6,]  0.2664415  0.14486388  .          .          -2.24087863
+</code></pre>
+
+<p>Notice that it stores the missing entries as &ldquo;zeros&rdquo;, but because it is class <code>&quot;Incomplete&quot;</code>, the object &ldquo;knows&rdquo;&ldquo; this is not really the case. In practice, we would not run <code>as()</code> on a huge matrix with tons of missing values, because we probably could not fit it in memory. So we would need a way of getting this matrix into R. This is typically stored on disk in what is known as &quot;market matrix&rdquo; format, as the triples 
+(i,j,value). We can reverse engineer this here just for a demo:</p>
+
+<pre><code class="r">i=row(x)[!is.na(x)]
+j=col(x)[!is.na(x)]
+value=x[!is.na(x)]
+cbind(i,j,value)
+</code></pre>
+
+<pre><code>##       i j       value
+##  [1,] 1 1  0.86548894
+##  [2,] 2 1 -0.60041722
+##  [3,] 3 1 -0.71692924
+##  [4,] 4 1  0.69655580
+##  [5,] 5 1  1.23116102
+##  [6,] 6 1  0.26644155
+##  [7,] 1 2  0.01565179
+##  [8,] 4 2 -0.50331812
+##  [9,] 5 2 -0.34232368
+## [10,] 6 2  0.14486388
+## [11,] 1 3  0.17479031
+## [12,] 2 3 -0.21190900
+## [13,] 4 3  0.55848392
+## [14,] 5 3 -0.81026875
+## [15,] 3 4  0.06437356
+## [16,] 4 4  1.54375663
+## [17,] 5 4 -0.82006429
+## [18,] 3 5 -0.09754133
+## [19,] 5 5 -0.13256942
+## [20,] 6 5 -2.24087863
+</code></pre>
+
+<p>For the Netflix data dimensions, there are 99 million non-missing entries, much less than 8.5 trillion entries in the full matrix. We would input the data via the (i,j,value) representation, and then construct <code>xs</code></p>
+
+<pre><code class="r">Incomplete(i=i,j=j,x=value)
+</code></pre>
+
+<pre><code>## 6 x 5 sparse Matrix of class &quot;Incomplete&quot;
+##                                                               
+## [1,]  0.8654889  0.01565179  0.1747903  .           .         
+## [2,] -0.6004172  .          -0.2119090  .           .         
+## [3,] -0.7169292  .           .          0.06437356 -0.09754133
+## [4,]  0.6965558 -0.50331812  0.5584839  1.54375663  .         
+## [5,]  1.2311610 -0.34232368 -0.8102688 -0.82006429 -0.13256942
+## [6,]  0.2664415  0.14486388  .          .          -2.24087863
+</code></pre>
+
+<p>Lets pretend this object is huge, for the purposes of our demonstration. We can double center it just as before, and run <code>softImpute()</code></p>
+
+<pre><code class="r">xsc=biScale(xs,col.scale=FALSE,row.scale=FALSE)
+fitss=softImpute(xsc,rank.max=3,lambda=1,trace=TRUE,type=&quot;svd&quot;)
+</code></pre>
+
+<pre><code>## Ssvd.als: 1 : obj 0.12477 ratio 1.399773 
+## Ssvd.als: 2 : obj 0.10698 ratio 0.03346523 
+## Ssvd.als: 3 : obj 0.10654 ratio 0.001959896 
+## Ssvd.als: 4 : obj 0.10647 ratio 0.0002632419 
+## Ssvd.als: 5 : obj 0.10645 ratio 7.161577e-05 
+## Ssvd.als: 6 : obj 0.10643 ratio 3.543294e-05 
+## Ssvd.als: 7 : obj 0.10642 ratio 2.193428e-05 
+## Ssvd.als: 8 : obj 0.10641 ratio 1.465807e-05 
+## Ssvd.als: 9 : obj 0.1064 ratio 1.020856e-05 
+## Ssvd.als: 10 : obj 0.1064 ratio 7.331556e-06 
+## Ssvd.als: 1 : obj 0.10493 ratio 0.007422874 
+## Ssvd.als: 2 : obj 0.10476 ratio 0.0004016194 
+## Ssvd.als: 3 : obj 0.10475 ratio 2.523417e-05 
+## Ssvd.als: 4 : obj 0.10475 ratio 1.678042e-06 
+## 1 : obj 0.15764 ratio 0.0112135 
+## Ssvd.als: 1 : obj 0.10461 ratio 0.0009216742 
+## Ssvd.als: 2 : obj 0.10459 ratio 6.319806e-05 
+## Ssvd.als: 3 : obj 0.10459 ratio 4.108082e-06 
+## 2 : obj 0.15695 ratio 0.001509593 
+## Ssvd.als: 1 : obj 0.10456 ratio 0.00022082 
+## Ssvd.als: 2 : obj 0.10455 ratio 1.726476e-05 
+## Ssvd.als: 3 : obj 0.10455 ratio 1.192326e-06 
+## 3 : obj 0.15685 ratio 0.0003756824 
+## Ssvd.als: 1 : obj 0.10454 ratio 7.009554e-05 
+## Ssvd.als: 2 : obj 0.10454 ratio 5.494532e-06 
+## 4 : obj 0.15682 ratio 0.0001152908 
+## Ssvd.als: 1 : obj 0.10454 ratio 2.460723e-05 
+## Ssvd.als: 2 : obj 0.10454 ratio 1.919478e-06 
+## 5 : obj 0.15681 ratio 4.042747e-05 
+## Ssvd.als: 1 : obj 0.10454 ratio 8.880054e-06 
+## 6 : obj 0.15681 ratio 1.305343e-05 
+## Ssvd.als: 1 : obj 0.10454 ratio 3.578849e-06 
+## 7 : obj 0.15681 ratio 4.999183e-06
+</code></pre>
+
+<pre><code class="r">fitss$d
+</code></pre>
+
+<pre><code>## [1] 1.0935910 0.6484576 0.0000000
+</code></pre>
+
+<pre><code class="r">fits3$d
+</code></pre>
+
+<pre><code>## [1] 1.0937636 0.6483598 0.0000000
+</code></pre>
+
+<p>Notice here that we get additional trace info with <code>trace=TRUE</code>. Since <code>xs</code> is &ldquo;huge&rdquo;, the SVD is computed using alternating subspace methods (with warm starts), and so we are seeing that as inner loops as well.</p>
+
+<p>With huge matrices we would not use the <code>complete()</code> function, but rather request individual predictions. 
+For example entries (2,2), and (3,2) could be imputed via</p>
+
+<pre><code class="r">impute(fitss,i=c(2,3),j=c(2,2))
+</code></pre>
+
+<pre><code>## [1] -0.8584843 -0.7868812
+</code></pre>
+
+<p>Again, the <code>unscale=TRUE</code> default for <code>impute()</code> means that the centering (stored on the object <code>fitss</code>) was reversed.</p>
+
+<h2>Reduced rank SVD of large sparse matrices</h2>
+
+<p>This is almost an aside, but the tools we developed for large matrix completion problems are also useful for working with large (but sparse) matrices. Suppose we had such a beast, and we wanted to compute its principal components. We would need to column-center the matrix, which would render it no longer sparse. We would also want to compute a few of the largest singular vectors for this beast. Lets see how we do that.</p>
+
+<p>First we will read in our large matrix, again in market-matrix format. For simplicity we use our same matrix <code>x</code>, except now the missing values are zeros.</p>
+
+<pre><code class="r">x0=sparseMatrix(i=i,j=j,x=value)
+x0
+</code></pre>
+
+<pre><code>## 6 x 5 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                               
+## [1,]  0.8654889  0.01565179  0.1747903  .           .         
+## [2,] -0.6004172  .          -0.2119090  .           .         
+## [3,] -0.7169292  .           .          0.06437356 -0.09754133
+## [4,]  0.6965558 -0.50331812  0.5584839  1.54375663  .         
+## [5,]  1.2311610 -0.34232368 -0.8102688 -0.82006429 -0.13256942
+## [6,]  0.2664415  0.14486388  .          .          -2.24087863
+</code></pre>
+
+<pre><code class="r">x0c=biScale(x0,col.scale=FALSE,row.scale=FALSE,row.center=FALSE)
+x0c
+</code></pre>
+
+<pre><code>## An object of class &quot;SparseplusLowRank&quot;
+## Slot &quot;x&quot;:
+## 6 x 5 sparse Matrix of class &quot;dgCMatrix&quot;
+##                                                               
+## [1,]  0.8654889  0.01565179  0.1747903  .           .         
+## [2,] -0.6004172  .          -0.2119090  .           .         
+## [3,] -0.7169292  .           .          0.06437356 -0.09754133
+## [4,]  0.6965558 -0.50331812  0.5584839  1.54375663  .         
+## [5,]  1.2311610 -0.34232368 -0.8102688 -0.82006429 -0.13256942
+## [6,]  0.2664415  0.14486388  .          .          -2.24087863
+## 
+## Slot &quot;a&quot;:
+##      [,1] [,2]
+## [1,]    0    1
+## [2,]    0    1
+## [3,]    0    1
+## [4,]    0    1
+## [5,]    0    1
+## [6,]    0    1
+## 
+## Slot &quot;b&quot;:
+##      [,1]        [,2]
+## [1,]   -1 -0.29038347
+## [2,]   -1  0.11418769
+## [3,]   -1  0.04815059
+## [4,]   -1 -0.13134432
+## [5,]   -1  0.41183156
+</code></pre>
+
+<p>So the column centered matrix is still stored in sparse format, but now it has class <code>&quot;SparseplusLowRank&quot;</code>, with slots <code>a</code> and <code>b</code>, and slot <code>x</code> the original matrix (<code>x0</code>). In fact, the centered matrix is \(x+ab^T\).</p>
+
+<p>Now we compute the SVD of this matrix, using our function <code>svd.als()</code> ( a workhorse for <code>softImpute()</code>)</p>
+
+<pre><code class="r">svdx0c=svd.als(x0c,rank=3,trace=TRUE)
+</code></pre>
+
+<pre><code>## Ssvd.als: 1 : obj 0.07908 ratio 4.007993 
+## Ssvd.als: 2 : obj 0.01221 ratio 0.2447519 
+## Ssvd.als: 3 : obj 0.00414 ratio 0.00376972 
+## Ssvd.als: 4 : obj 0.00409 ratio 2.135618e-05 
+## Ssvd.als: 5 : obj 0.00409 ratio 1.215228e-07
+</code></pre>
+
+<pre><code class="r">svdx0c$d
+</code></pre>
+
+<pre><code>## [1] 2.105814 1.928454 1.766865
+</code></pre>
+
+<p>We can compare this to the SVD of the full matrix version of this</p>
+
+<pre><code class="r">x02=as.matrix(x0)
+svd(scale(x02,TRUE,FALSE))$d
+</code></pre>
+
+<pre><code>## [1] 2.10581400 1.92845422 1.76686517 0.48909346 0.07725295
+</code></pre>
+
+<p>One can actually use regularization here as well. For large problems, this can speed up convergence, and biases the convergence criterion toward the larger singular values. Note that if \(Z=S_\lambda(X)\) has rank \(r\), then the rank-\(r\) SVD of \(X\) will have the same left and right singular vectors as \(Z\), and singular values \(\lambda\) units higher.</p>
+
+<h2>Warm starts and regularization paths</h2>
+
+<p>Typically we don&#39;t have a clue about what values of \(\lambda\) are reasonable. One useful function is <code>lambda0()</code>, which identifies the smallest value of \(\lambda\) for which the rank of the solution is zero.</p>
+
+<pre><code class="r">lam0=lambda0(xs)
+lam0
+</code></pre>
+
+<pre><code>## [1] 2.316587
+</code></pre>
+
+<pre><code class="r">fit0=softImpute(xs,lambda=lam0+.2)
+fit0$d
+</code></pre>
+
+<pre><code>## [1] 0
+</code></pre>
+
+<p>(If we had used <code>lam0</code> itself, we would have to increase the number of iterations and decrease the threshold for softImpute to achieve an exact zero with ALS) </p>
+
+<p>This value is actually the largest singular value for the version of <code>xs</code> with the missing values replaced by zeros. Lets check:</p>
+
+<pre><code class="r">xs0=as(xs,&quot;sparseMatrix&quot;)
+fit0=svd.als(xs0)
+fit0$d
+</code></pre>
+
+<pre><code>## [1] 2.316587 1.978608
+</code></pre>
+
+<p>Now, armed with <code>lam0</code> we could make a sequence of lambda values, decreasing toward zero.</p>
+
+<pre><code class="r">lamseq=exp(seq(from=log(lam0),to=log(1),length=10))
+lamseq
+</code></pre>
+
+<pre><code>##  [1] 2.316587 2.110134 1.922079 1.750784 1.594754 1.452630 1.323172
+##  [8] 1.205251 1.097839 1.000000
+</code></pre>
+
+<p>Now the idea is to fit a sequence of models, using these values of lambda, and warms starts. For large matrices, we also want to be clever with the rank, because we could not fit models with very large rank.
+Here is an example of what we could do.</p>
+
+<pre><code class="r">fits=as.list(lamseq)
+ranks=as.integer(lamseq)
+rank.max=2
+warm=NULL
+for( i in seq(along=lamseq)){
+  fiti=softImpute(xs,lambda=lamseq[i],rank=rank.max,warm=warm)
+  ranks[i]=sum(round(fiti$d,4)&gt;0)
+  rank.max=min(ranks[i]+2,4)
+  warm=fiti
+  fits[[i]]=fiti
+  cat(i,&quot;lambda=&quot;,lamseq[i],&quot;rank.max&quot;,rank.max,&quot;rank&quot;,ranks[i],&quot;\n&quot;)
+  }
+</code></pre>
+
+<pre><code>## Warning in Ssimpute.als(x, J, thresh, lambda, maxit, trace.it, warm.start,
+## : Convergence not achieved by 100 iterations
+</code></pre>
+
+<pre><code>## 1 lambda= 2.316587 rank.max 3 rank 1 
+## 2 lambda= 2.110134 rank.max 3 rank 1 
+## 3 lambda= 1.922079 rank.max 4 rank 2 
+## 4 lambda= 1.750784 rank.max 4 rank 3 
+## 5 lambda= 1.594754 rank.max 4 rank 3 
+## 6 lambda= 1.45263 rank.max 4 rank 3 
+## 7 lambda= 1.323172 rank.max 4 rank 3 
+## 8 lambda= 1.205251 rank.max 4 rank 3 
+## 9 lambda= 1.097839 rank.max 4 rank 3 
+## 10 lambda= 1 rank.max 4 rank 3
+</code></pre>
+
+<p>Notes:</p>
+
+<ul>
+<li>The warning message is for the first fit; it needs more iterations to get convergence to the NULL solution, and in fact we see that it didn&#39;t quite get there, since the rank is 1 (<code>fits[[1]]$d</code>)</li>
+<li>We added 2 to the rank achieved for the previous lambda. That is fine for this small problem, but for large problems (Netflix size), you don&#39;t want to be too cavalier with large ranks. Ideally, the rank you use should be sufficiently large to achieve a solution with some soft-thresholded singular values set to zero. This would guarantee that you have solved the regularized problem.</li>
+</ul>
+
+</body>
+
+</html>

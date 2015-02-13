@@ -1,0 +1,218 @@
+<!-- 
+%\VignetteEngine{knitr::knitr} 
+%\VignetteIndexEntry{An Introduction to softImpute}
+--> 
+---
+title: "softImpute Vignette"
+author: "Trevor Hastie"
+date: "September 5, 2014"
+output: html_document
+---
+ `softImpute` is a package for matrix completion using nuclear norm regularization. It offers two algorithms:
+ 
+ * One iteratively computes the soft-thresholded SVD of a filled in matrix - an algorithm described in [Mazumder et al (2010)](http://web.stanford.edu/~hastie/Papers/mazumder10a.pdf). This is option `type="svd"` in the call to `softImpute()`.
+ 
+ * The other uses alternating ridge regression, at each stage filling in the missing entries with the latest estimates. This is described in [Hastie et al (2014)](http://arxiv.org/abs/1410.2596). This we believe is the faster option, and is option `type="als"` in the call to `softImpute`.
+ 
+ The package can deal with both small and very large matrices; the latter are stored in sparse-matrix format using a new S4 class `"Incomplete"`. For example, `softImpute` can happily fit a rank 100 SVD to the netflix data (480,189 x 17,770, 99% missing) using a machine with about 32Gb of memory. For smaller matrices with missing data, the usual full matrix with `NA` suffices.
+  
+ The package has two other notable features. It can compute a (low-rank) SVD of a large sparse matrix, stored in sparse matrix format. This can be done either with nuclear-norm regularization or not, the former being somewhat faster.
+ 
+ There is a function `biScale()` that generalizes the `scale()` function in R. It can simultaneously scale a matrix to have row and column means zero, and row and column variances one. Of course, any subset of these can be chosen as well. This function can deal with the missing values, if present. It is also smart enough to deal with large sparse matrices. In this case, it does not actually apply the centering operation and destroy the sparsity; instead it stores the resulting matrix in the new matrix class `"SparseplusLowRank"`. This is a special class used by `softImpute`, originally created to allow it to avoid ever storing a large, filled in matrix, when the original matrix was stored in sparse matrix format via class `"Incomplete"`.
+ 
+ This vignette is a simple guide to using the package.
+ 
+##  What softImpute solves
+ 
+ Here we briefly describe the problem solved. Suppose $X$ is a large $m\times n$ matrix, with many missing entries. Let $\Omega$ contain the pairs of indices $(i,j)$ where $X$ is observed, and let $P_\Omega(X)$ denote a matrix with the entries in $\Omega$ left alone, and all other entries set to zero. So when $X$ has missing entries in $\Omega^\perp$, $P_\Omega(X)$ would set the missing values to zero. 
+ 
+ Consider the criterion
+ $$\min_M\frac12\|P_\Omega(X)-P_\Omega(M)\|^2_F+\lambda\|M\|_*,$$
+ where $\|M\|_*$ is the nucelar norm of $M$ (sum of singular values).
+ 
+ If $\widehat M$ solves this convex-cone problem, then it satisfies the following stationarity condition:
+ $$ {\widehat M}=S_\lambda(Z)$$ 
+ where $$Z=P_\Omega(X)+P_{\Omega^\perp}(\widehat M).$$
+ Hence $Z$ is the "filled in"" version of $X$. The operator $S_\lambda(Z)$ applied to matrix $Z$ does the following:
+ 
+ 1. Compute the SVD of $Z=UDV^T$, and let $d_i$ be the singular values in $D$.
+ 2. Soft-threshold the singular values: $d_i^*= (d_i-\lambda)_+$.
+ 3. Reconstruct: $S_\lambda(Z)=UD^*V^T$.
+ We call this operation the "soft-thresholded SVD". Notice that for sufficiently large $\lambda$, $D^*$ will be rank-reduced, and hence so will be $UD^*V^T$.
+ 
+ This suggests the obvious iterative algorithm: using the current estimate for $M$, create $Z$, and update $M$ by the soft-thresholded SVD of $Z$.
+ 
+This is exactly what `softImpute` does on (small) matrices with missing values stored as NAs. By small we mean small enough that the SVD can be computed by R in a small amount of time. 
+
+This is not tenable for very large matrices, like those stored as class `"Incomplete"`. Here we make two very important changes to the recipe:
+
+* Re-express $Z$ at each iteration as as $$Z=P_\Omega(X)-P_\Omega(\widehat M) + \widehat M.$$ This is of the form `"SparseplusLowRank"` (assuming $\widehat M$ is low rank), and hence can be stored. Left and right matrix multiplies by skinny matrices can also be efficiently performed.
+* Anticipating that the solution $\widehat M$ will have low rank, compute only a low-rank SVD of $Z$, using alternating subspace methods.
+
+Indeed, `softImpute` has a `rank` argument that allows one to limit the rank of the solution; if the algorithm returns a solution with rank lower than the specified rank $r$, you know it has solved the unrestricted problem.
+
+Consider the alternative criterion
+ $$\min_{A,B}\frac12\|P_\Omega(X)-P_\Omega(AB^T)\|^2_F+\frac{\lambda}2(\|A\|_F^2 +\|B\|_F^2),$$
+ where $A$ and $B$ have each $r$ columns, and let us suppose that $r$ is bigger than or equal to the solution rank of the earlier criterion. This problem is not convex, but remarkably, it has a solution that satisfies 
+ ${\widehat A}{\widehat B}^T=\widehat M$!
+
+We can once again characterize the stationarity conditions, now in terms of $\widehat A$ and $\widehat B$. Let $$Z=P_\Omega(X)+P_{\Omega^\perp}({\widehat A}{\widehat B}^T),$$ the filled in version of $X$. Then 
+$$\widehat B= ({\widehat A}^T{\widehat A}+\lambda I)^{-1}{\widehat A}^T Z.$$ 
+We get $\widehat  B$ by ridge regressions of the columns of $Z$ on $\widehat A$. For $\widehat A$ its the same, with the roles of $A$ and $B$ reversed. This again suggests an obvious alternation, now by ridged regressions.
+After each regression, we update the component $A$ or $B$, and the filled in $Z$. If $r$ is sufficiently large, this again solves the same problem as before. 
+
+This last algorithm (softImpute ALS) can be seen as combining the alternating subspace SVD algorithm for computing the SVD with the iterative filling in and SVD calculation. It turns out that this interweaving leads to computational savings, and allows for a very efficient distributed implementation (not covered here).
+
+## A simple example
+
+We will start with a small and simple example. Lets generate a small matrix and make some values missing.
+```{r}
+require(softImpute)
+set.seed(1011)
+x=matrix(rnorm(30),6,5)
+x[sample(1:30,10,replace=FALSE)]=NA
+x
+fits=softImpute(x,trace=TRUE,type="svd")
+fits
+```
+Since this is a small matrix, it has solved it using repeated SVDs. There is no penalization here ($\lambda=0$), and by default the rank was taken to be 2. Since there is no penalization, if the rank was given to be $\min(m,n)$, then there is no restriction, and any values for the missing data would give the same minimum loss of 0. In other words, either penalization, or a rank restriction (or both) are needed for sensible imputation.
+
+We could use ALS instead here (the default for `type=` argument)
+```{r}
+fita=softImpute(x,trace=TRUE)
+```
+The objectives are different! At this point we are playing with non-convex optimization, and so the solutions can be local minima. Lets use some regularization now, choosing a value for lambda that will give a rank 2 solution (this required trial and error to get it right).
+
+```{r}
+fits2=softImpute(x,rank.max=3,lambda=1.9,trace=TRUE,type="svd")
+fita2=softImpute(x,rank.max=3,lambda=1.9,trace=TRUE)
+fits2$d
+```
+These two are the same (modulo convergence criterion). Because the smallest singular value is zero, we know we are in the convex regime, and so both algorithms give the same solution. We can impute the missing values using `complete()`, which returns the full matrix:
+```{r}
+complete(x,fits2)
+```
+We can first double center our matrix before completion
+```{r}
+xc=biScale(x,col.scale=FALSE,row.scale=FALSE,trace=TRUE)
+xc
+fits3=softImpute(xc,rank.max=3,lambda=1,type="svd")
+fits3$d
+complete(x,fits3,unscale=TRUE)
+```
+Notice that we completed `x` with `fits3`, which was run on the centered version `xc`. The scaling info is stored on the SVD object as an attribute, and with `unscale=TRUE` (actually the default), the centering is reversed.
+
+## Debiasing the fit
+
+We have recently added a function `deBias` (since version 1.4) that allows one to upscale the elements `d` of the SVD object returned by `softImpute`. This is achieved by linear regression using the observed values of `x`.
+```{r}
+fits2$d
+deBias(x,fits2)$d
+```
+
+
+## Using the sparse matrix version
+
+So far we have not been worried about matrix size, because `x` is small. We can convert it to a sparse matrix object
+```{r}
+xs=as(x,"Incomplete")
+xs
+```
+Notice that it stores the missing entries as "zeros", but because it is class `"Incomplete"`, the object "knows"" this is not really the case. In practice, we would not run `as()` on a huge matrix with tons of missing values, because we probably could not fit it in memory. So we would need a way of getting this matrix into R. This is typically stored on disk in what is known as "market matrix" format, as the triples 
+(i,j,value). We can reverse engineer this here just for a demo:
+
+```{r}
+i=row(x)[!is.na(x)]
+j=col(x)[!is.na(x)]
+value=x[!is.na(x)]
+cbind(i,j,value)
+```
+For the Netflix data dimensions, there are 99 million non-missing entries, much less than 8.5 trillion entries in the full matrix. We would input the data via the (i,j,value) representation, and then construct `xs`
+```{r}
+Incomplete(i=i,j=j,x=value)
+```
+Lets pretend this object is huge, for the purposes of our demonstration. We can double center it just as before, and run `softImpute()`
+```{r}
+xsc=biScale(xs,col.scale=FALSE,row.scale=FALSE)
+fitss=softImpute(xsc,rank.max=3,lambda=1,trace=TRUE,type="svd")
+fitss$d
+fits3$d
+```
+Notice here that we get additional trace info with `trace=TRUE`. Since `xs` is "huge", the SVD is computed using alternating subspace methods (with warm starts), and so we are seeing that as inner loops as well.
+
+With huge matrices we would not use the `complete()` function, but rather request individual predictions. 
+For example entries (2,2), and (3,2) could be imputed via
+```{r}
+impute(fitss,i=c(2,3),j=c(2,2))
+```
+Again, the `unscale=TRUE` default for `impute()` means that the centering (stored on the object `fitss`) was reversed.
+
+## Reduced rank SVD of large sparse matrices
+
+This is almost an aside, but the tools we developed for large matrix completion problems are also useful for working with large (but sparse) matrices. Suppose we had such a beast, and we wanted to compute its principal components. We would need to column-center the matrix, which would render it no longer sparse. We would also want to compute a few of the largest singular vectors for this beast. Lets see how we do that.
+
+First we will read in our large matrix, again in market-matrix format. For simplicity we use our same matrix `x`, except now the missing values are zeros.
+```{r}
+x0=sparseMatrix(i=i,j=j,x=value)
+x0
+x0c=biScale(x0,col.scale=FALSE,row.scale=FALSE,row.center=FALSE)
+x0c
+```
+So the column centered matrix is still stored in sparse format, but now it has class `"SparseplusLowRank"`, with slots `a` and `b`, and slot `x` the original matrix (`x0`). In fact, the centered matrix is $x+ab^T$.
+
+Now we compute the SVD of this matrix, using our function `svd.als()` ( a workhorse for `softImpute()`)
+```{r}
+svdx0c=svd.als(x0c,rank=3,trace=TRUE)
+svdx0c$d
+```
+We can compare this to the SVD of the full matrix version of this
+```{r}
+x02=as.matrix(x0)
+svd(scale(x02,TRUE,FALSE))$d
+```
+One can actually use regularization here as well. For large problems, this can speed up convergence, and biases the convergence criterion toward the larger singular values. Note that if $Z=S_\lambda(X)$ has rank $r$, then the rank-$r$ SVD of $X$ will have the same left and right singular vectors as $Z$, and singular values $\lambda$ units higher.
+
+## Warm starts and regularization paths
+
+Typically we don't have a clue about what values of $\lambda$ are reasonable. One useful function is `lambda0()`, which identifies the smallest value of $\lambda$ for which the rank of the solution is zero.
+```{r}
+lam0=lambda0(xs)
+lam0
+fit0=softImpute(xs,lambda=lam0+.2)
+fit0$d
+```
+(If we had used `lam0` itself, we would have to increase the number of iterations and decrease the threshold for softImpute to achieve an exact zero with ALS) 
+
+This value is actually the largest singular value for the version of `xs` with the missing values replaced by zeros. Lets check:
+```{r}
+xs0=as(xs,"sparseMatrix")
+fit0=svd.als(xs0)
+fit0$d
+```
+
+
+Now, armed with `lam0` we could make a sequence of lambda values, decreasing toward zero.
+```{r}
+lamseq=exp(seq(from=log(lam0),to=log(1),length=10))
+lamseq
+```
+Now the idea is to fit a sequence of models, using these values of lambda, and warms starts. For large matrices, we also want to be clever with the rank, because we could not fit models with very large rank.
+Here is an example of what we could do.
+```{r}
+fits=as.list(lamseq)
+ranks=as.integer(lamseq)
+rank.max=2
+warm=NULL
+for( i in seq(along=lamseq)){
+  fiti=softImpute(xs,lambda=lamseq[i],rank=rank.max,warm=warm)
+  ranks[i]=sum(round(fiti$d,4)>0)
+  rank.max=min(ranks[i]+2,4)
+  warm=fiti
+  fits[[i]]=fiti
+  cat(i,"lambda=",lamseq[i],"rank.max",rank.max,"rank",ranks[i],"\n")
+  }
+```
+Notes:
+
+* The warning message is for the first fit; it needs more iterations to get convergence to the NULL solution, and in fact we see that it didn't quite get there, since the rank is 1 (`fits[[1]]$d`)
+* We added 2 to the rank achieved for the previous lambda. That is fine for this small problem, but for large problems (Netflix size), you don't want to be too cavalier with large ranks. Ideally, the rank you use should be sufficiently large to achieve a solution with some soft-thresholded singular values set to zero. This would guarantee that you have solved the regularized problem.

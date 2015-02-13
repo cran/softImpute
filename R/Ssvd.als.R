@@ -17,8 +17,8 @@ Ssvd.als <-
     D=warm.start$d
     JD=length(D)
     if(JD >= J){
-      U=warm.start$u[,seq(J)]
-      V=warm.start$v[,seq(J)]
+      U=warm.start$u[,seq(J),drop=FALSE]
+      V=warm.start$v[,seq(J),drop=FALSE]
       Dsq=D[seq(J)]
     }
     else{

@@ -1,8 +1,9 @@
 useDynLib(softImpute)
 
-import(Matrix)
+importFrom(utils,head,tail,packageDescription)
+import(Matrix,methods)
 
-export(softImpute,biScale,svd.als,impute,complete,Incomplete,splr,lambda0,simpute.als,simpute.svd,Ssimpute.als,Ssimpute.svd,Ssvd.als,softImpute.x.matrix,softImpute.x.Incomplete)
+export(softImpute,biScale,svd.als,impute,complete,Incomplete,splr,lambda0,simpute.als,simpute.svd,Ssimpute.als,Ssimpute.svd,Ssvd.als,softImpute.x.matrix,softImpute.x.Incomplete,clean.warm.start,deBias)
 #exportPattern("*")
 exportClasses(SparseplusLowRank,Incomplete)
 exportMethods("%*%",as.matrix,dim,norm,rowMeans,rowSums,colMeans,colSums,coerce)

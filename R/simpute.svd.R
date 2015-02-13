@@ -21,8 +21,8 @@ simpute.svd <-
     D=warm.start$d
     nzD=sum(D>0)
     JD=min(nzD,J)
-    U=warm.start$u[,seq(JD)]
-    V=warm.start$v[,seq(JD)]
+    U=warm.start$u[,seq(JD),drop=FALSE]
+    V=warm.start$v[,seq(JD),drop=FALSE]
     D=D[seq(JD)]
     xhat=U%*%(D*t(V))
     xfill[xnas] <- xhat[xnas]

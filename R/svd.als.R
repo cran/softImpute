@@ -1,4 +1,8 @@
 svd.als=function(x, rank.max=2, lambda=0,thresh = 1e-05, maxit=100,trace.it=FALSE,warm.start=NULL,final.svd=TRUE){
+  if(rank.max>(rmax<-min(dim(x)))){
+    rank.max=rmax
+    warning(paste("rank.max should not exceed min(dim(x)); changed to ",rmax))
+  }
   ismiss=is.na(x)
   if(any(ismiss))stop("NAs in x; use softImpute instead")
   this.call=match.call()
