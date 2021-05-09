@@ -2,7 +2,7 @@
       integer nrow, ncol, nrank,nomega, irow(nomega),pcol(ncol+1)
       double precision u(nrow,nrank),v(ncol,nrank),r(nomega)
 c      double precision rtemp
-      integer ii,jj,ni,jstart,jend,i,j
+      integer ii,ni,jstart,jend,i,j
 !HPF$ INDEPENDENT
       ni=0
       do 10 j=1,ncol

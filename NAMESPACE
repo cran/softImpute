@@ -1,6 +1,8 @@
 useDynLib(softImpute)
 
 importFrom(utils,head,tail,packageDescription)
+importFrom("stats", "rnorm", "weighted.mean")
+
 import(Matrix,methods)
 
 export(softImpute,biScale,svd.als,impute,complete,Incomplete,splr,lambda0,simpute.als,simpute.svd,Ssimpute.als,Ssimpute.svd,Ssvd.als,softImpute.x.matrix,softImpute.x.Incomplete,clean.warm.start,deBias)

@@ -75,7 +75,7 @@ vectors}
 \references{Rahul Mazumder, Trevor Hastie and Rob Tibshirani (2010)
   \emph{Spectral Regularization Algorithms for Learning Large Incomplete
 Matrices},
-  \url{http://www.stanford.edu/~hastie/Papers/mazumder10a.pdf}\cr
+  \url{https://web.stanford.edu/~hastie/Papers/mazumder10a.pdf}\cr
  \emph{ Journal of Machine Learning Research 11 (2010) 2287-2322}
 }
 \author{Trevor Hastie, Rahul Mazumder\cr

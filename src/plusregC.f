@@ -2,7 +2,7 @@
       integer nrow, ncol, nrank,nomega, irow(nomega),pcol(ncol+1)
       double precision u(nrow,nrank),v(ncol,nrank),zy(nrank)
       double precision zz(nrank,nrank),x(nomega)
-      integer ii,jj,ni,jstart,jend,i,j,m,n
+      integer ii,ni,jstart,jend,i,j,m,n
 !HPF$ INDEPENDENT
       do 1 i=1,nrank
          zy(i)=0d0
