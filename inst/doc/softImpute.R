@@ -1,5 +1,5 @@
 ## -----------------------------------------------------------------------------
-require(softImpute)
+require(softImpute, quietly = TRUE)
 set.seed(1011)
 x=matrix(rnorm(30),6,5)
 x[sample(1:30,10,replace=FALSE)]=NA

@@ -1,3 +1,8 @@
+#' rdname softImpute-internal
+#' @inheritParams softImpute
+#' @inheritParams softImpute.x.matrix
+#' @param ... further arguments to what? braaivleis?
+#' @export
 simpute.svd <-
   function (x, J = 2, thresh = 1e-05,lambda=0,maxit=100,trace.it=FALSE,warm.start=NULL,...) 
 {

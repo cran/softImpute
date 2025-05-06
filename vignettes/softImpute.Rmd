@@ -1,14 +1,20 @@
-<!-- 
-%\VignetteEngine{knitr::knitr} 
-%\VignetteIndexEntry{An Introduction to softImpute}
---> 
 ---
-title: "softImpute Vignette"
+title: "An Introduction to softImpute"
 author: "Trevor Hastie"
 date: "September 5, 2014"
-output: html_document
+output:
+  html_document:
+  fig_caption: yes
+  theme: cerulean
+  toc: yes
+  toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{An Introduction to softImpute}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
- `softImpute` is a package for matrix completion using nuclear norm regularization. It offers two algorithms:
+
+`softImpute` is a package for matrix completion using nuclear norm regularization. It offers two algorithms:
  
  * One iteratively computes the soft-thresholded SVD of a filled in matrix - an algorithm described in [Mazumder et al (2010)](https://web.stanford.edu/~hastie/Papers/mazumder10a.pdf). This is option `type="svd"` in the call to `softImpute()`.
  
@@ -38,7 +44,8 @@ output: html_document
  1. Compute the SVD of $Z=UDV^T$, and let $d_i$ be the singular values in $D$.
  2. Soft-threshold the singular values: $d_i^*= (d_i-\lambda)_+$.
  3. Reconstruct: $S_\lambda(Z)=UD^*V^T$.
- We call this operation the "soft-thresholded SVD". Notice that for sufficiently large $\lambda$, $D^*$ will be rank-reduced, and hence so will be $UD^*V^T$.
+
+We call this operation the "soft-thresholded SVD". Notice that for sufficiently large $\lambda$, $D^*$ will be rank-reduced, and hence so will be $UD^*V^T$.
  
  This suggests the obvious iterative algorithm: using the current estimate for $M$, create $Z$, and update $M$ by the soft-thresholded SVD of $Z$.
  
@@ -59,7 +66,7 @@ Consider the alternative criterion
 We can once again characterize the stationarity conditions, now in terms of $\widehat A$ and $\widehat B$. Let $$Z=P_\Omega(X)+P_{\Omega^\perp}({\widehat A}{\widehat B}^T),$$ the filled in version of $X$. Then 
 $$\widehat B= ({\widehat A}^T{\widehat A}+\lambda I)^{-1}{\widehat A}^T Z.$$ 
 We get $\widehat  B$ by ridge regressions of the columns of $Z$ on $\widehat A$. For $\widehat A$ its the same, with the roles of $A$ and $B$ reversed. This again suggests an obvious alternation, now by ridged regressions.
-After each regression, we update the component $A$ or $B$, and the filled in $Z$. If $r$ is sufficiently large, this again solves the same problem as before. 
+After each regression, we update the component $A$ or $B$, and the filled in $Z$. If $r$ is sufficiently large, this aggain solves the same problem as before. 
 
 This last algorithm (softImpute ALS) can be seen as combining the alternating subspace SVD algorithm for computing the SVD with the iterative filling in and SVD calculation. It turns out that this interweaving leads to computational savings, and allows for a very efficient distributed implementation (not covered here).
 
@@ -67,7 +74,7 @@ This last algorithm (softImpute ALS) can be seen as combining the alternating su
 
 We will start with a small and simple example. Lets generate a small matrix and make some values missing.
 ```{r}
-require(softImpute)
+require(softImpute, quietly = TRUE)
 set.seed(1011)
 x=matrix(rnorm(30),6,5)
 x[sample(1:30,10,replace=FALSE)]=NA

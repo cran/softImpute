@@ -1,3 +1,7 @@
+#' rdname softImpute-internal
+#' @inheritParams softImpute
+#' @inheritParams softImpute.x.matrix
+#' @export
 Ssimpute.als <-
 function (x, J = 2, thresh = 1e-05,lambda=0,maxit=100,trace.it=FALSE,warm.start=NULL,final.svd=TRUE) 
 {

@@ -1,3 +1,6 @@
+#' rdname softImpute-internal
+#' @param a an svd object with components `u`, `d` and `v` or `NULL`
+#' @export
 clean.warm.start=function(a){
   if(is.null(a))return(NULL)
   d=a$d

@@ -4,13 +4,7 @@
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("softImpute", String)
-#else
 #define _(String) (String)
-#endif
-
 
 #define FDEF(name)  {#name, (DL_FUNC) &F77_SUB(name), sizeof(name ## _t)/sizeof(name ## _t[0]), name ##_t}
 void F77_SUB(plusregc)(
