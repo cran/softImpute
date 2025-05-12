@@ -1,10 +1,10 @@
 #' Standardize a matrix to have optionally row means zero and variances one,
 #' and/or column means zero and variances one.
-#' 
+#'
 #' A function for standardizing a matrix in a symmetric fashion. Generalizes
 #' the \code{scale} function in R. Works with matrices with NAs, matrices of
 #' class "Incomplete", and matrix in "sparseMatrix" format.
-#' 
+#'
 #' This function computes a transformation
 #' \deqn{\frac{X_{ij}-\alpha_i-\beta_j}{\gamma_i\tau_j}} to transform the
 #' matrix \eqn{X}. It uses an iterative algorithm based on
@@ -15,7 +15,7 @@
 #' some of the required constraints. When any of the row/column centers or
 #' scales are provided, they are used rather than estimated in the above
 #' model.
-#' 
+#'
 #' @param x matrix, possibly with NAs, also of class "Incomplete" or
 #' "sparseMatrix" format.
 #' @param maxit When both row and column centering/scaling is requested,
@@ -46,11 +46,14 @@
 #' @note This function will be described in detail in a forthcoming paper
 #' @author Trevor Hastie, with help from Andreas Buja and Steven Boyd\cr,
 #' Maintainer: Trevor Hastie \email{hastie@@stanford.edu}
+#' @references Trevor Hastie, Rahul Mazumder, Jason Lee, Reza Zadeh (2015)
+#' \emph{Matrix Completion and Low-rank  SVD via Fast Alternating Least Squares},
+#' \url{https://arxiv.org/abs/1410.2596}\cr \emph{Journal of Machine Learning Research, 16, 3367-3402}
 #' @seealso
 #' \code{softImpute},\code{Incomplete},\code{lambda0},\code{impute},\code{complete},
 #' and class \code{"SparseplusLowRank"}
 #' @keywords models array multivariate
-#' @examples 
+#' @examples
 #' set.seed(101)
 #' n=200
 #' p=100

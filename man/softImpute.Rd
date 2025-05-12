@@ -128,7 +128,9 @@ impute(fit4,i=c(1,3,7),j=c(2,5,10),unscale=FALSE)#ignore scaling and centering
 Rahul Mazumder, Trevor Hastie and Rob Tibshirani (2010)
 \emph{Spectral Regularization Algorithms for Learning Large Incomplete
 Matrices}, \url{https://hastie.su.domains/Papers/mazumder10a.pdf}\cr
-\emph{ Journal of Machine Learning Research 11 (2010) 2287-2322}
+\emph{ Journal of Machine Learning Research, 11,  2287-2322}\cr
+Trevor Hastie, Rahul Mazumder, Jason Lee, Reza Zadeh (2015) \emph{Matrix Completion and Low-rank  SVD via Fast Alternating Least Squares},
+\url{https://arxiv.org/abs/1410.2596}\cr \emph{Journal of Machine Learning Research, 16, 3367-3402}
 }
 \seealso{
 \code{biScale}, \code{svd.als},\code{Incomplete}, \code{lambda0},

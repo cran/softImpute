@@ -1,8 +1,8 @@
 Package: softImpute
 Type: Package
 Title: Matrix Completion via Iterative Soft-Thresholded SVD
-Version: 1.4-2
-Date: 2025-05-25
+Version: 1.4-3
+Date: 2025-05-12
 Authors@R: c(person("Trevor", "Hastie", role=c("aut", "cre"),
 	   	   email = "hastie@stanford.edu"),
 	     person("Rahul", "Mazumder", role=c("aut"),
@@ -17,10 +17,10 @@ VignetteBuilder: knitr
 Suggests: knitr, rmarkdown
 Depends: Matrix, methods
 NeedsCompilation: yes
-Packaged: 2025-05-06 23:27:38 UTC; hastie
+Packaged: 2025-05-12 11:54:40 UTC; hastie
 Author: Trevor Hastie [aut, cre],
   Rahul Mazumder [aut],
   Balasubramanian Narasimhan [ctb]
 Maintainer: Trevor Hastie <hastie@stanford.edu>
 Repository: CRAN
-Date/Publication: 2025-05-06 23:50:02 UTC
+Date/Publication: 2025-05-12 13:40:02 UTC

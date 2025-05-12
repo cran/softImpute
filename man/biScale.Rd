@@ -99,6 +99,11 @@ xS=sparseMatrix(x=x,i=i,j=j)
 xSb=biScale(xS)
 class(xSb)
 }
+\references{
+Trevor Hastie, Rahul Mazumder, Jason Lee, Reza Zadeh (2015)
+\emph{Matrix Completion and Low-rank  SVD via Fast Alternating Least Squares},
+\url{https://arxiv.org/abs/1410.2596}\cr \emph{Journal of Machine Learning Research, 16, 3367-3402}
+}
 \seealso{
 \code{softImpute},\code{Incomplete},\code{lambda0},\code{impute},\code{complete},
 and class \code{"SparseplusLowRank"}

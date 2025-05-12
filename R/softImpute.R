@@ -1,11 +1,11 @@
 #' impute missing values for a matrix via nuclear-norm regularization.
-#' 
+#'
 #' fit a low-rank matrix approximation to a matrix with missing values via
 #' nuclear-norm regularization. The algorithm works like EM, filling in the
 #' missing values with the current guess, and then solving the optimization
 #' problem on the complete matrix using a soft-thresholded SVD. Special
 #' sparse-matrix classes available for very large matrices.
-#' 
+#'
 #' SoftImpute solves the following problem for a matrix \eqn{X} with missing
 #' entries: \deqn{\min||X-M||_o^2 +\lambda||M||_*.} Here \eqn{||\cdot||_o} is
 #' the Frobenius norm, restricted to the entries corresponding to the
@@ -20,7 +20,7 @@
 #' right matrix multiplication are provided for this class. For large matrices,
 #' the function \code{Incomplete()} can be used to build the appropriate sparse
 #' input matrix from market-format data.
-#' 
+#'
 #' @param x An m by n matrix with NAs. For large matrices can be of class
 #' \code{"Incomplete"}, in which case the missing values are represented as
 #' pseudo zeros leading to dramatic storage reduction. \code{x} can have been
@@ -74,7 +74,9 @@
 #' @references Rahul Mazumder, Trevor Hastie and Rob Tibshirani (2010)
 #' \emph{Spectral Regularization Algorithms for Learning Large Incomplete
 #' Matrices}, \url{https://hastie.su.domains/Papers/mazumder10a.pdf}\cr
-#' \emph{ Journal of Machine Learning Research 11 (2010) 2287-2322}
+#' \emph{ Journal of Machine Learning Research, 11,  2287-2322}\cr
+#'  Trevor Hastie, Rahul Mazumder, Jason Lee, Reza Zadeh (2015) \emph{Matrix Completion and Low-rank  SVD via Fast Alternating Least Squares},
+#' \url{https://arxiv.org/abs/1410.2596}\cr \emph{Journal of Machine Learning Research, 16, 3367-3402}
 #' @keywords models array multivariate
 #' @examples
 #' set.seed(101)

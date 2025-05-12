@@ -1,10 +1,10 @@
 #' rdname softImpute-internal
 #' @inheritParams softImpute
 #' @inheritParams softImpute.x.matrix
-#' @param ... further arguments to what? braaivleis?
+#' @param ... sink argument for unwanted arguments
 #' @export
 Ssimpute.svd <-
-  function (x, J = 2, thresh = 1e-05,lambda=0,maxit=100,trace.it=FALSE,warm.start=NULL,...) 
+  function (x, J = 2, thresh = 1e-05,lambda=0,maxit=100,trace.it=FALSE,warm.start=NULL,...)
 {
 ###This function expects an object of class "Incomplete" which inherits from "sparseMatrix", where the missing entries
 ###are replaced with zeros. If it was centered, then it carries the centering info with it
@@ -14,7 +14,7 @@ Ssimpute.svd <-
   if(all(match(binames,a,FALSE))){
     biats=attributes(x)[binames]
   } else biats=NULL
-  
+
   if(!inherits(x,"dgCMatrix"))x=as(x,"dgCMatrix")
   irow=x@i
   pcol=x@p

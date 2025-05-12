@@ -43,7 +43,7 @@ particularly useful when constructing a path of solutions with decreasing
 values of \code{lambda} and increasing \code{rank.max}. The previous
 solution can be provided directly as a warm start for the next.}
 
-\item{...}{further arguments to what? braaivleis?}
+\item{...}{sink argument for unwanted arguments}
 }
 \description{
 rdname softImpute-internal

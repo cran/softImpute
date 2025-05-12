@@ -1,0 +1,28 @@
+bibentry(
+    bibtype = "Article",
+    title = "Spectral Regularization Algorithms for Learning Large Incomplete Matrices",
+    author = c(
+        person(given = "Rahul", family = "Mazumder"),
+        person(given = "Trevor", family = "Hastie"),
+        person(given = "Robert", family = "Tibshirani")
+    ),
+    journal = "Journal of Machine Learning Research",
+    year = 	 "2010",
+    volume = "11",
+    pages = "2287--2322",
+    header="To cite softImpute in publication use:"
+)
+bibentry(
+    bibtype = "Article",
+    title = "Matrix Completion and Low-rank {SVD} via Fast Alternating Least Squares",
+    author = c(
+             person(given = "Trevor", family = "Hastie"),
+             person(given = "Rahul", family = "Mazumder"),
+             person(given = "Jason", family = "Lee"),
+             person(given = "Reza", family = "Zadeh")
+    ),
+    journal = 	 "Journal of Machine Learning Research",
+    volume="16",
+    pages="3367--3402",
+    year = 	 "2015"
+)

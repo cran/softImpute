@@ -1,10 +1,10 @@
 #' rdname softImpute-internal
 #' @inheritParams softImpute
 #' @inheritParams softImpute.x.matrix
-#' @param ... further arguments to what? braaivleis?
+#' @param ... sink argument for unwanted arguments
 #' @export
 simpute.svd <-
-  function (x, J = 2, thresh = 1e-05,lambda=0,maxit=100,trace.it=FALSE,warm.start=NULL,...) 
+  function (x, J = 2, thresh = 1e-05,lambda=0,maxit=100,trace.it=FALSE,warm.start=NULL,...)
 {
   this.call=match.call()
   a=names(attributes(x))
